@@ -8,12 +8,42 @@
 </head>
 <body>
 <div id="root">
-    <h1>asdf</h1>
+    <h1>hello {{ name }}</h1>
+    <a v-bind:href="url">baidu</a>
+    <div>
+        <p>单向绑定<input type="text" :value="text1"/></p>
+        <!--双向绑定只能用于表单类元素-->
+        <p>双向绑定<input type="text" v-model:value="text2"/></p>
+        <p>双向绑定<input type="text" v-model="text3"/></p>
+    </div>
 </div>
 <script type="text/javascript">
-     const x = new Vue({
-         el: '#root', //或document.getElementById('root')
-     });
+    const vm = new Vue({
+        el: '#root', //或document.getElementById('root')
+        // data: {
+        //     name: 2,
+        //     url: "https://baidu.com",
+        //     text1: "bind1",
+        //     text2: "bind2",
+        //     text3: "bind3"
+        // },
+        // data () => {} //this指向window，不可以
+        // data() {} // 可以，和下面的等效
+        data: function () {
+            console.log(this) // this是Vue实例对象
+            return {
+                name: 2,
+                url: "https://baidu.com",
+                text1: "bind1",
+                text2: "bind2",
+                text3: "bind3"
+            }
+        }
+    });
+    // setTimeout(
+    //     vm.$mount('#root'), // 挂载的第二种写法
+    //     1000
+    // )
 </script>
 </body>
 </html>
