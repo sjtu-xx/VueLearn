@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="app">
+    <button v-on:click="showInfo">点击</button>
+    <!--会覆盖event-->
+    <button @click="showInfo(2)">点击</button>
+    <!--需要增加占位符-->
+    <button @click="showInfo(2, $event)">点击</button>
+<!--
+Vue中的事件修饰符
+1、prevent  阻止默认事件
+2、stop  阻止事件冒泡
+3、once 事件只触发一次
+4、capture 使用事件的捕获模式（在捕获阶段处理数据。从外层元素触发到内）
+5、self 只有event.target是当前元素时才触发（事件的target是事件所在的元素，不包括父元素）
+6、passive 事件默认行为立即执行，无需等待回调函数（正常是  回调函数后再执行默认行为 如@wheel）
+两个事件修饰符可以连写 如@click.prevent.stop.once
+@keyup.ctrl.y指的是ctrl+y
+-->
+    <!--等价于showInfo($event)中event.preventDefault()阻止默认行为（这里是组织）-->
+    <a href="http://baidu.com" @click.prevent="showInfo"></a>
+</div>
+</body>
+<script>
+    const vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    name: 'xx'
+                }
+            },
+            methods: {
+                // showInfo: (event) => { console.log(this) } // 这里的this是window
+                // 被vue代理的函数最好写为普通函数
+                showInfo(number) {
+                    console.log(this) //这里的this是vm
+                    alert("这是提示信息:" + number)
+                }
+            }
+        }
+    )
+</script>
+</html>

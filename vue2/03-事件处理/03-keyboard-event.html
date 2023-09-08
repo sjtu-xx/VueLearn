@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="app">
+    <!--
+    常用别名：
+    enter
+    delete：推格和删除
+    esc
+    space
+    tab：必须配合keydown使用
+    up
+    down
+    left
+    right
+
+    特殊按键：ctrl,alt,shift,meta键:
+    （1）配合keyup： 按下修饰键的同时，再按下其他按键，随后释放其他键，事件才被触发
+    （2）配合keydown： 正常触发事件
+    -->
+    <input type="text" placeholder="回车输入提示" @keyup.enter="showInfo"/>
+</div>
+</body>
+<script>
+    // 自定义按键别名
+    Vue.config.keyCode.huiche = 13;
+    const vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    name: 'xx'
+                }
+            },
+            methods: {
+                showInfo(e) {
+                    // if (e.keyCode !== 13) return //等价于@keyup.enter // keyCode已被废弃
+                    // e.key就是按键名称
+                    console.log(e.target.value)
+                }
+            }
+        }
+    )
+</script>
+</html>
