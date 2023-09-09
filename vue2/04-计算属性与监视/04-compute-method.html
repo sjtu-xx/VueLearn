@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="root">
+    姓：<input type="text" v-model="firstName"/> <br/>
+    名：<input type="text" v-model="lastName"/> <br/>
+    <!--    fullName: {{firstName.slice(0,3)}} - {{lastName}}-->
+    <!--     fullName: {{getFullName()}} //变量变了后，会扫描所有的模板-->
+    fullName: {{fullName}}
+</div>
+</body>
+<script type="text/javascript">
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                firstName: 'a',
+                lastName: 'b'
+            }
+        },
+        computed: {
+            // // 完整模式
+            // fullName: {
+            //     get() {
+            //         // vue将这里的this指向vm
+            //         return this.firstName.slice(0, 3) + '-' + this.lastName;
+            //     },
+            //     set(value) {
+            //         this.firstName = 'a'
+            //         this.lastName = 'b'
+            //     }
+            // }
+
+            // fullName: function () {
+            //     return this.firstName.slice(0, 3) +'-'+ this.lastName;
+            // }
+
+            fullName() {
+                return this.firstName.slice(0, 3) + '-' + this.lastName;
+            }
+        },
+        methods: {
+            getFullName() {
+                return this.firstName + this.lastName
+            }
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="root">
+    <h2>今天天气很{{info}}</h2>
+    <button @click="changeWeather">切换天气</button>
+
+    <h2>number: {{number.a}}</h2>
+    <button @click="numberPlus">a+</button>
+</div>
+</body>
+<script>
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                isHot: true,
+                info: '',
+                number: {
+                    a: 1
+                }
+            }
+        },
+        methods: {
+            changeWeather() {
+                this.isHot = !this.isHot;
+            },
+            numberPlus() {
+                this.number.a++;
+            }
+        },
+        // watch中的handler不能开启异步任务
+        // 而计算属性不能开启异步任务返回结果
+        watch: {
+            // 可以监视data中的属性和计算属性
+            isHot: {
+                immediate: true, //初始化时，让handler调用一下
+                handler(newValue, oldValue) {
+                    console.log('isHot被修改了', newValue, oldValue)
+                    this.info = newValue ? '炎热' : '寒冷';
+                }
+            },
+            // 简写形式
+            // isHot(newValue, oldValue) {
+            //     console.log('isHot被修改了')
+            // },
+            // 深度监视
+            // 'numbers'只能监视number对象，不能监视内部的对象
+            'numbers':{
+                deep: true,
+                handler(newValue, oldValue) {
+                    console.log('number变了')
+                }
+            },
+            // 监视number中的所有对象
+            // 监视多级结构中某个属性的变化
+            // 'number.a': {
+            //     handler(newValue, oldValue) {
+            //         console.log('number.a变了')
+            //     }
+            // }
+        }
+    })
+    // 监视的第二种方法
+    // vm.$watch('isHot', {
+    //     immediate: true, //初始化时，让handler调用一下
+    //     handler(newValue, oldValue) {
+    //         console.log('isHost被修改了', newValue, oldValue)
+    //     }
+    // })
+    // 简写
+    // 不能使用箭头函数
+    // vm.$watch('isHot', function (newValue, oldValue) {
+    //     console.log('isHot修改了')
+    // })
+</script>
+</html>
