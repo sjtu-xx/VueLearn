@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="root">
+    <!--遍历数组-->
+    <ul>
+        <li v-for="(person, index) in persons" :key="person.id">
+            {{person.name}} -- {{index}}
+        </li>
+    </ul>
+    <!--遍历对象-->
+    <ul>
+        <li v-for="(value, key) in car" :key="key">
+            {{key}} -- {{value}}
+        </li>
+    </ul>
+    <!--遍历字符串-->
+    <ul>
+        <li v-for="(char, index) in 'asdf'" :key="index">
+            {{char}} -- {{index}}
+        </li>
+    </ul>
+    <!--遍历指定次数-->
+    <ul>
+        <li v-for="(num, index) in 5" :key="index">
+            {{num}} -- {{index}}
+        </li>
+    </ul>
+</div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        'el': '#root',
+        data: function () {
+            return {
+                persons: [
+                    {id: 1, name: "aa1"},
+                    {id: 2, name: "aa2"},
+                    {id: 3, name: "aa3"}
+                ],
+                car: {
+                    name: 'a6',
+                    price: '22'
+                }
+            }
+        }
+    })
+</script>
+</html>

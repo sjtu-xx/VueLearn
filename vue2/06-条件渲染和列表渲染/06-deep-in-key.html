@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="root">
+    <button @click.once="addPerson">增加人员</button>
+    <!--遍历数组-->
+    <ul>
+        <!-- 这里不能使用index作为key -->
+        <li v-for="(person, index) in persons" :key="person.id">
+            {{person.name}} -- {{index}}
+            <input type="text"/>
+        </li>
+    </ul>
+</div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        'el': '#root',
+        data: function () {
+            return {
+                persons: [
+                    {id: 1, name: "aa1"},
+                    {id: 2, name: "aa2"},
+                    {id: 3, name: "aa3"}
+                ],
+                car: {
+                    name: 'a6',
+                    price: '22'
+                }
+            }
+        },
+        methods: {
+            addPerson() {
+                this.persons.unshift({id: 4, name: 'a4'})
+            }
+        }
+    })
+</script>
+</html>

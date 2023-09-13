@@ -13,5 +13,10 @@ Object.defineProperty(person, 'age', {
 
 Vue对象中的`_data`使用数据劫持Vue中的`data`
 
-[2_data_proxy.html](vue2/02-数据代理/2_data_proxy.html)
+[2_data_proxy.html](../vue2/02-数据代理/2_data_proxy.html)
+
+## 遍历列表时key的作用
+![img.png](images/img.png)
+
+![img_1.png](images/img_1.png)
 

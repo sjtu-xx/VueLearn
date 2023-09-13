@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="root">
+    <input type="text" placeholder="输入后筛选" v-model="filterWord"/>
+    <button @click="sortType = 0">原顺序</button>
+    <button @click="sortType = 1">升序</button>
+    <button @click="sortType = 2">降序</button>
+    <ul>
+        <li v-for="(person, index) in filteredPersons" :key="person.id">
+            {{person.name}} -- {{index}}
+        </li>
+    </ul>
+</div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        'el': '#root',
+        data: function () {
+            return {
+                persons: [
+                    {id: 2, name: "aa2"},
+                    {id: 1, name: "aa1"},
+                    {id: 3, name: "aa3"}
+                ],
+                filterWord: '',
+                sortType: 0
+            }
+        },
+        // 这种好一点
+        computed: {
+            filteredPersons() {
+                const arr = this.persons.filter(s => s.name.indexOf(this.filterWord) !== -1)
+                console.log(arr)
+                if (this.sortType) {
+                    arr.sort((s1, s2) => (this.sortType === 1 ? s1.name > s2.name : s1.name < s2.name) ? 1 : -1)
+                }
+                return arr
+            }
+        }
+        // watch: {
+        //     filterWord: {
+        //         immediate: true,
+        //         handler(newValue, oldValue) {
+        //             this.filteredPersons = this.persons.filter(s => s.name.indexOf(newValue) !== -1)
+        //         }
+        //     }
+        // }
+    })
+</script>
+</html>
