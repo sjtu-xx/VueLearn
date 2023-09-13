@@ -20,3 +20,4 @@ Vue对象中的`_data`使用数据劫持Vue中的`data`
 
 ![img_1.png](images/img_1.png)
 
+## 监视数据变更原理
