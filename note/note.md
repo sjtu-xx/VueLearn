@@ -21,3 +21,6 @@ Vue对象中的`_data`使用数据劫持Vue中的`data`
 ![img_1.png](images/img_1.png)
 
 ## 监视数据变更原理
+定义_data(Observer)，代理data中的对象
+
+可以通过`Vue.set`增加数据对象属性，但不能增加data中的根属性。
