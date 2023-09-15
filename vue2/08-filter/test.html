@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="root">
+    <input type="text" :value="myFilter(date)"/> <br/>
+    <input type="text" :value="date | myFilter2"/> <br/>
+    <input type="text" :value="date | myFilter3"/> <br/>
+</div>
+</body>
+<script type="text/javascript">
+    // 全局过滤器
+    Vue.filter('myFilter3', function (date) {
+        return date.toLocaleDateString()
+    })
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                date: new Date()
+            }
+        },
+        methods: {
+            myFilter(date) {
+                return date.toLocaleDateString();
+            }
+        },
+        filters: {
+            myFilter2(date) {
+                return date.toLocaleDateString()
+            }
+        }
+    })
+</script>
+</html>

@@ -27,7 +27,7 @@
                 <option value="beijing">北京</option>
             </select>
         </label><br/>
-<!--        在失去焦点时收集信息-->
+        <!--        在失去焦点时收集信息-->
         <textarea v-model.lazy="text"> </textarea><br/>
         <button>提交</button> <!--表单提交默认会刷新页面-->
     </form>
@@ -38,14 +38,12 @@
         el: '#root',
         data() {
             return {
-                userinfo: {
-                    account: '',
-                    password: '',
-                    sex: '',
-                    hobby: [],
-                    area: 'beijing',
-                    text: ''
-                }
+                account: '',
+                password: '',
+                sex: '',
+                hobby: [],
+                area: 'beijing',
+                text: ''
             }
         }
     })
