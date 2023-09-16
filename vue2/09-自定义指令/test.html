@@ -25,12 +25,14 @@
             // 1、指令与元素绑定时
             // 2、指令所在的模板被重新解析时
             big(domElement, valueObj) {
+                console.log(this) // 这里的this也是window
                 console.log(valueObj)
                 domElement.innerHTML = valueObj.value * 10
             },
             fbind: {
                 // 指令与元素绑定时
                 bind(domElement, valueObj) {
+                    console.log(this) // 这里的this是window
                     domElement.value = valueObj.value
                 },
                 // 指令所在的元素插入页面时
