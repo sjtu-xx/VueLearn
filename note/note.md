@@ -45,3 +45,22 @@ Vue对象中的`_data`使用数据劫持Vue中的`data`
 8. `v-bind`:绑定解析表达式,可以省略v-bind
 9. `v-model`:双向数据绑定
 10. `v-cloak`:防止闪现,与css配合:`[v-cloak]{display:none}`
+
+## 生命周期
+![img.png](images/img2.png)
+
+## 组件
+### 组件名称
+1、一个单词：
+- School 首字母大写
+- school 全小写
+2、多个单词：
+- `my-school` kebab-case命名
+- MySchool CamelCase需要Vue脚手架支持
+
+### 组件标签
+- `<school></school>`
+- `<school/>` 没有脚手架时，会导致后续组件无法渲染
+
+### 简写方式
+`const school = Vue.extend(options)`可以简写为`const school = options`
