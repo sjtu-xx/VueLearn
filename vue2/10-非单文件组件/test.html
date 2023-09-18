@@ -14,19 +14,12 @@
 </div>
 </body>
 <script type="text/javascript">
-    const school = Vue.extend({
-        template: `
-          <div>
-            <h2>{{ name }}</h2>
-          </div>
-        `,
-        data() {
-            return {
-                name: 'schoolName'
-            }
-        }
-    })
-
+    // 本质是一个名为VueComponent的构造函数
+    // template中有<student/>时，vue会创建school组件的实例对象
+    // 每次调用Vue.extend都会返回一个新的VueComponent
+    // this指向：
+    //     组件： data函数、methods中的函数、watch中的函数、computed中的函数 中的this指向 VueComponent实例对象
+    //     new Vue()： data函数、methods中的函数、watch中的函数、computed中的函数 中的this指向 Vue实例对象
     const student = Vue.extend({
         template: `
           <div>
@@ -40,6 +33,20 @@
         }
     })
 
+    const school = Vue.extend({
+        components: {student},
+        template: `
+          <div>
+            <student></student>
+            <h2>{{ name }}</h2>
+          </div>
+        `,
+        data() {
+            return {
+                name: 'schoolName'
+            }
+        }
+    })
 
     const hello = Vue.extend({
         template: `
