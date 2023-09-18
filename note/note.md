@@ -66,3 +66,8 @@ Vue对象中的`_data`使用数据劫持Vue中的`data`
 `const school = Vue.extend(options)`可以简写为`const school = options`
 
 ## VueComponent
+
+## 脚手架
+- `npm install -g @vue/cli`
+- `vue create <proj_name>`
+- 
