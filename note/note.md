@@ -70,4 +70,99 @@ Vue对象中的`_data`使用数据劫持Vue中的`data`
 ## 脚手架
 - `npm install -g @vue/cli`
 - `vue create <proj_name>`
-- 
+
+- `vue inspect > out.js`将vue隐藏的配置输出到out.js
+
+### ref
+标签的ref属性可以通过`this.$ref.<ref_value>`访问dom元素或组件实例对象（VueComponent）
+
+### props
+```json lines
+{
+  props: [
+    'name',
+    'age'
+  ]
+}
+
+{
+  props: {
+    name: String
+  }
+}
+{
+  props: {
+    name: {
+      type: String,
+      default: "123",
+      required: true
+    }
+  }
+}
+```
+- 使用`<School name="name" />` 如果使用`<School :name="name" />`是动态绑定
+- props中的数据比data中的数据先加载，所以data中可以使用props中的数据
+- props中的数据是只读的，不能修改。如果需要修改，复制到data中修改。
+
+### mixin
+用于组件共享配置
+```javascript
+//mixin.js
+export const me = {
+    data() {
+      return {
+          name: 'xx'
+      }  
+    },
+    methods: {
+        showName() {
+            console.log("name")
+        }
+    },
+    mounted() {
+        console.log("mounted")
+    }
+}
+
+// app.vue
+import {me} from 'mixin.js'
+export default {
+    mixins: [me]
+}
+
+//全局混入
+//main.js
+Vue.mixin(me)
+```
+
+mixins中的先加载，但是会覆盖。
+- 普通函数覆盖
+- 生命周期钩子会同时调用
+
+### 插件
+```javascript
+// plugins.js
+const obj = {
+    install(Vue) {
+        console.log('@@@install')
+        Vue.mixin({
+            data() {
+                return {
+                    name: 'xx'
+                }
+            },
+        })
+        Vue.filter('mySlice', function (){})
+        Vue.directive('fbind', {})
+        // 给Vue原型上增加一个方法
+        Vue.prototype.hello = () => {}
+    }
+}
+
+export default obj
+
+
+// main.js
+import plugins from 'plugins.js'
+Vue.use(plugins)
+```
