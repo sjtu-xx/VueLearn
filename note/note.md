@@ -166,3 +166,9 @@ export default obj
 import plugins from 'plugins.js'
 Vue.use(plugins)
 ```
+
+## storage
+- localStorage存储的内容需要手动清除
+- sessionStorage会随着浏览器的关闭清除
+- xxxStorage.getItem(xx)如果value找不到会返回null
+- Json.parse(null)结果依然是null
