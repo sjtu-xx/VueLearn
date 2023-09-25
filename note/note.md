@@ -172,3 +172,61 @@ Vue.use(plugins)
 - sessionStorage会随着浏览器的关闭清除
 - xxxStorage.getItem(xx)如果value找不到会返回null
 - Json.parse(null)结果依然是null
+
+## 自定义事件
+### 绑定
+子组件
+```javascript
+this.$emit('eventName', p1, p2)
+```
+
+父组件
+```vue
+<ChildComponet @eventName="handleEvent"/>
+
+//或
+this.$refs.childCom.$on('eventName', this.handleEvent)
+这里的handleEvent也可以是箭头函数，但不能是function，因为this指向不对。
+```
+
+### 解绑
+子组件中
+```javascript
+this.$off('eventName')
+
+// 解绑所有的自定义事件
+this.$off()
+
+// 销毁组件会解绑所有事件，去除响应式
+this.$destroy()
+```
+
+组件默认绑定的是自定义事件，`@click`默认绑定的是自定义的`click`。如果想使用原生的click，使用`@click.native`
+
+## 全局事件总线
+任意组件间通信
+```javascript
+new Vue({
+render: h => h(App),
+beforeCreate() {
+    // 注册总线
+ Vue.prototype.$bus = this
+}
+}).$mount('#app')
+
+
+
+
+// 发送消息
+this.$bus.$emit("")
+// 接受消息
+this.$bus.$on('hello', (data)=>{})
+// 最好在beforeDestory钩子中，解绑当前组件中用到的事件。
+beforeDestory() {
+    this.$bus.$off('hello')
+}
+```
+
+## 消息订阅与发布
+`pubsub-js`
+
