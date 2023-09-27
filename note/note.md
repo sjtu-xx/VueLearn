@@ -230,3 +230,84 @@ beforeDestory() {
 ## 消息订阅与发布
 `pubsub-js`
 
+## `this.$nextTick`
+在下一次DOM更新结束后，执行其指定的回调。
+
+什么时候用：当改变数据后，要基于更新后的新DOM进行某些操作时，要在nextTick的回调函数中执行。
+
+## 过度和动画
+动画
+```vue
+<template>
+  <transition name="hello" appear>
+    <h1>你好</h1>
+  </transition>
+</template>
+<style>
+  // 如果.v-enter-active就是默认所有的transition包裹的元素都执行动画
+  .hello-enter-active {
+    animation: ani 0.5s linear;
+  }
+
+  .hello-leave-active {
+    animation: ani 0.5s linear reverse;
+  }
+
+  @keyframes ani {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0px);
+    }
+  }
+</style>
+```
+
+过渡
+```vue
+
+<template>
+  <!-- transition中只能有一个元素，多个元素使用transition-group并且内部的元素要有key -->
+  <transition name="hello" appear>
+    <h1>你好</h1>
+  </transition>
+</template>
+<style>
+  h1 {
+    //transition: 0.5s linear
+  }
+
+  /* 进入的起点 */
+  .hello-enter, .hello-leave-to {
+    transform: translateX(-100%);
+  }
+  
+  .hello-enter-active, .hello-leave-active {
+    transition: 0.5s linear;
+  }
+
+  /* 进入的终点 */
+  .hello-enter-to, .hello-leave {
+    transform: translateX(0);
+  }
+</style>
+```
+
+
+animate.css可以直接用
+```vue
+<template>
+  <transition
+      appear
+      name="class__asdf"  这里写类名
+      enter-active-class="asdfasdf"
+      leave-active-class="asdfasdf"
+  >
+    
+  </transition>
+</template>
+<script>
+import 'animate.css'
+</script>
+```
