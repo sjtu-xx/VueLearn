@@ -311,3 +311,50 @@ animate.css可以直接用
 import 'animate.css'
 </script>
 ```
+
+## proxy
+### 网络请求方式
+- xhr：`new XMLHttpRequest(); xhr.open(); xhr.send()`
+- jQuery：主要是dom操作，包含一部分网络请求
+- axios：推荐
+- fetch：会包装两层promise，兼容性差
+
+### 同源策略
+> **同源策略:** 协议名、主机名、端口号必须一致
+> 
+> 直接的服务器请求不受同源策略的影响（如vue-cli中的devServer、nginx）
+>
+
+```js
+vue.config.js
+
+module.exports = {
+    // 方式一
+    // devServer: {
+    //     proxy: 'http://localhost:5000' // 会自动创建一个与前台端口一致的代理服务器，代理proxy地址的请求
+    // }
+    // 方式二
+    devServer: {
+        proxy: {
+            "/api": {
+                target: 'http://localhost:5000',
+                pathRewrite: {"^/api":""},
+                ws: true,
+                changeOrigin: true //用于控制请求头中的host字段
+            }
+        }
+    }
+}
+```
+
+## 示例
+样式引入
+```js
+// 在App.vue中引用
+import './assets/css/bootstrap.css'
+```
+
+```html
+// 在index.html中引入
+<link rel="stylesheet" href="<%= BASE_URL %>css/bootstrap.css">
+```
