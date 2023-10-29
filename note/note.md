@@ -313,6 +313,14 @@ import 'animate.css'
 ```
 
 ## proxy
+`vue-resource`也可以实现ajax请求（`npm i vue-resource`）
+```js
+import vueresouce from 'vue-resource'
+Vue.use(vueresource)
+
+this.$http.get()
+```
+
 ### 网络请求方式
 - xhr：`new XMLHttpRequest(); xhr.open(); xhr.send()`
 - jQuery：主要是dom操作，包含一部分网络请求
@@ -358,3 +366,9 @@ import './assets/css/bootstrap.css'
 // 在index.html中引入
 <link rel="stylesheet" href="<%= BASE_URL %>css/bootstrap.css">
 ```
+
+> this.info = {...this.info, ...dataObj} 将dataObj中有的元素赋值给info
+> 
+> 
+
+##
