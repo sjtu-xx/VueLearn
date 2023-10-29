@@ -39,7 +39,11 @@
         <p>我不是默认值</p>
       </template>
     </MyCategory>
-
+<!--  具名作用域插槽-->
+    <MyCategory>
+      <template v-slot:header="datas"></template>
+      <template #header="datas"></template>
+    </MyCategory>
   </div>
 </template>
 
