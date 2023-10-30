@@ -371,4 +371,9 @@ import './assets/css/bootstrap.css'
 > 
 > 
 
-##
+## vuex
+vue中实现集中式状态管理的插件.
+
+集中式管理多个组件的共享状态.
+
+![img.png](images/img3.png)
