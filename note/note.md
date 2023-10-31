@@ -376,4 +376,16 @@ vue中实现集中式状态管理的插件.
 
 集中式管理多个组件的共享状态.
 
+由`store`管理`Actions`/`Mutations`/`State`.
+- `store.dispath`
+- `store.commit`
+
 ![img.png](images/img3.png)
+
+使用:
+- `npm i vuex@3`
+- `Vue.use(Vuex)`
+- 创建store文件夹，新建`index.js`文件（或创建vuex文件夹，新建`store.js`文件）
+- `new Vue({store})`
+- vc ==> store
+
