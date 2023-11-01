@@ -15,11 +15,22 @@ const mutations = {
     }
 }
 const state = {
-    sum: 0
+    sum: 0,
+    x: 1,
+    y: 2,
+    z: 3
+}
+
+// 用于将state中的数据进行加工
+const getters = {
+    bigSum(state) {
+        return state.sum * 10
+    }
 }
 
 export default new Vuex.Store({
     actions,
     mutations,
     state,
+    getters
 })
