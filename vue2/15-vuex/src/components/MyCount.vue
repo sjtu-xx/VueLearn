@@ -39,6 +39,7 @@ export default {
     ...mapState({x: 'x', y: 'y', z: 'z'}),
     // 数组写法
     ...mapState(['x', 'y', 'z']),
+    ...mapState('count', ['x', 'y', 'z']),
 
     // 借助mapGetters生成计算属性，从getters中读数据
     ...mapGetters(['bigSum'])
@@ -48,6 +49,8 @@ export default {
       this.$store.dispatch('jia', this.n)
       // 也可以直接调用mutation中的方法
       // this.$store.commit('JIA', this.n)
+      // 使用命名空间时要这样
+      // this.$store.dispatch('count/jia', this.n)
     },
     // map写法
     // ...mapMutations({'increment': 'JIA'})
