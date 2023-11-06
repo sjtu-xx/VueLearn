@@ -530,3 +530,20 @@ const router = new VueRouter({
   }
 </script>
 ```
+
+### 全局路由守卫
+```js
+// 全局前置路由守卫
+router.beforeEach((to, from, next) => {
+    if (to.meta.auth === 'authed') {
+        // 放行
+        next()
+    } else {
+        alert("没有权限")
+    }
+})
+
+router.afterEach((to,from) => {
+    document.title = to.meta.title || '其他标题'
+})
+```
