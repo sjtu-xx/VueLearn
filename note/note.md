@@ -389,3 +389,144 @@ vue中实现集中式状态管理的插件.
 - `new Vue({store})`
 - vc ==> store
 
+## vrouter
+```vue
+<template>
+  <!--历史记录相关-->
+  <router-link replace></router-link>
+  <router-link push></router-link>
+  <!--起a标签的作用-->
+  <router-link active-class="activeclass" to="/path"></router-link>
+  <router-link active-class="activeclass" to="/path/childPath"></router-link>
+  <!--query参数-->
+  <router-link active-class="activeclass" to="/path/childPath?a=1"></router-link>
+  <router-link active-class="activeclass" :to="`/path/childPath?a={m.param1}`"></router-link>
+  <!--query的对象写法-->
+  <router-link active-class="activeclass" :to="{
+      path: '/path/childPath',
+      query: {
+          id: m.id,
+          title: m.title
+      }
+  }"></router-link>
+  <router-link active-class="activeclass" :to="{
+      name: 'path1',
+      query: {
+          id: m.id,
+          
+          
+          title: m.title
+      }
+  }"></router-link>
+  <!--  params只能用name不能用path -->
+  <router-link active-class="activeclass" :to="{
+      name: 'path1',
+      params: {
+          id: m.id,
+          title: m.title
+      }
+  }"></router-link>
+  <router-view></router-view>
+</template>
+```
+
+```js
+const router = new VueRouter({
+    routes: [
+        {
+            name: 'path1',
+            path: '/path1',
+            component: Component1,
+            children: [
+                {
+                    path: 'news', // 不能加斜杠！！！
+                    component: ChildComponent1
+                },
+                {
+                    path: 'news2/:id/:title', // id,titile是param参数
+                    component: ChildComponent1,
+                    // 方法1
+                    // props: {a:1}
+                    // 方法2: 会把组件的所有params参数以props的形式传给这个组件。
+                    // props: true
+                    // 方法3
+                    // props($route) {
+                    //     return {id: $route.query.id, title: $route.query.title}
+                    // }
+                    // 解构赋值
+                    props({query:{id,title}}) {
+                        return {id: id, title: title}
+                    }
+                }
+            ]
+        }
+    ]
+})
+```
+
+```js
+页面会有$routes
+
+所有的页面共享$router
+```
+
+- `src/pages`放路由组件
+- `src/components`放一般组件
+
+> 可以将对象保存在window中方便调式 如`window.a = this.$routes`
+
+
+### 编程式路由导航
+```vue
+<script>
+    this.$router.push({
+      name: '',
+      query: {
+          id: m.id
+      }
+    })
+  
+    this.$router.replace({
+      name: '',
+      query: {
+        id: m.id
+      } 
+    })
+  
+  this.$router.back() // 前进
+  this.$router.forward() // 后退
+  this.$router.go(i) // 往前走i步
+</script>
+```
+
+### 路由缓存
+```vue
+
+<template>
+  <!-- 默认缓存所有 -->
+  <keep-alive>
+    <router-view></router-view>
+  </keep-alive>
+  <!-- 只缓存给定的组件:组件名称 -->
+  <keep-alive include="News">
+    <router-view></router-view>
+  </keep-alive>
+  <keep-alive :include=["News"] >
+    <router-view></router-view>
+  </keep-alive>
+</template>
+```
+
+### 新的生命周期钩子
+在keep-alive情况下，
+```vue
+<script>
+  methods: {
+    activated(){
+    },
+    deactivated()
+    {
+    }
+  }
+</script>
+```
