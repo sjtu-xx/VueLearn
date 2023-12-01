@@ -547,3 +547,22 @@ router.afterEach((to,from) => {
     document.title = to.meta.title || '其他标题'
 })
 ```
+
+### 独享路由守卫
+只有前置没有后置
+```js
+const router = new VueRouter({
+    routes: [
+        {
+            name: 'path1',
+            path: '/path1',
+            component: Component1,
+            beforeEnter: (to, from, next) => {
+                
+            }
+        }
+    ]
+})
+```
+
+
