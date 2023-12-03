@@ -29,8 +29,6 @@
     - 若返回一个对象，对象中的属性、方法在模板中均可以直接使用
     - 若返回一个渲染函数，则可以自定义渲染内容。`()=>{ return h('h1', 'content') }`
 
-> setup不能是async函数
-
 ### ref函数
 
 ```vue
@@ -338,3 +336,18 @@ export function useDebouncedRef(value, delay = 200) {
 - isProxy
 
 ## Composition API的优势
+
+## 其他组件
+### Fragment
+包装在template内的虚拟元素
+
+### Teleport
+移动
+
+```vue
+<Teleport to="#some-id" />
+<Teleport to=".some-class" />
+<Teleport to="[data-teleport]" />
+```
+
+### suspense
